@@ -99,6 +99,7 @@ public class RestMonitorStore implements IRestMonitorStore {
             logger.error(e.getMessage(), e);
             throw new InternalServerErrorException(e.getMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(e);
         }
     }
@@ -113,6 +114,7 @@ public class RestMonitorStore implements IRestMonitorStore {
             logger.error(e.getMessage(), e);
             throw new InternalServerErrorException(e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(e);
         }
     }

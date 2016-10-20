@@ -5,6 +5,7 @@ import io.sls.group.model.Group;
 import io.sls.group.rest.IRestGroupStore;
 import io.sls.persistence.IResourceStore;
 import io.sls.utilities.RestUtilities;
+import lombok.extern.slf4j.Slf4j;
 import org.jboss.resteasy.spi.NoLogWebApplicationException;
 
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ import java.net.URI;
  * Date: 29.08.12
  * Time: 13:34
  */
+@Slf4j
 public class RestGroupStore implements IRestGroupStore {
     private final String resourceURI = "resource://io.sls.group/groupstore/groups/";
     private final IGroupStore groupStore;
@@ -31,9 +33,11 @@ public class RestGroupStore implements IRestGroupStore {
         try {
             return groupStore.readGroup(groupId);
         } catch (IResourceStore.ResourceStoreException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
 
         } catch (IResourceStore.ResourceNotFoundException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         }
     }
@@ -50,6 +54,7 @@ public class RestGroupStore implements IRestGroupStore {
             URI createdUri = RestUtilities.createURI(resourceURI, id);
             return Response.created(createdUri).entity(createdUri).build();
         } catch (IResourceStore.ResourceStoreException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         }
     }

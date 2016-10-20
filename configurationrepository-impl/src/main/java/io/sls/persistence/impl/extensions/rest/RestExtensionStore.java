@@ -50,6 +50,7 @@ public class RestExtensionStore implements IRestExtensionStore {
 
             return ret;
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         } catch (IResourceStore.ResourceStoreException e) {
             logger.error(e.getLocalizedMessage(), e);
@@ -62,6 +63,7 @@ public class RestExtensionStore implements IRestExtensionStore {
         try {
             return extensionStore.read(id, version);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         } catch (IResourceStore.ResourceStoreException e) {
             logger.error(e.getLocalizedMessage(), e);
@@ -85,6 +87,7 @@ public class RestExtensionStore implements IRestExtensionStore {
                 throw new NotFoundException(e.getLocalizedMessage(), e);
             }
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         }
     }
@@ -116,6 +119,7 @@ public class RestExtensionStore implements IRestExtensionStore {
                 throw new NotFoundException(e.getLocalizedMessage(), e);
             }
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         }
     }

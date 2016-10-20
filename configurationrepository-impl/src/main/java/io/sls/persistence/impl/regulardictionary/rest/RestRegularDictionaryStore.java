@@ -45,6 +45,7 @@ public class RestRegularDictionaryStore extends RestVersionInfo implements IRest
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
     }
@@ -54,6 +55,7 @@ public class RestRegularDictionaryStore extends RestVersionInfo implements IRest
         try {
             return regularDictionaryStore.read(id, version, filter, order, index, limit);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NotFoundException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceStoreException e) {
             logger.error(e.getLocalizedMessage(), e);
@@ -69,6 +71,7 @@ public class RestRegularDictionaryStore extends RestVersionInfo implements IRest
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NotFoundException(e.getLocalizedMessage(), e);
         }
     }
@@ -82,13 +85,16 @@ public class RestRegularDictionaryStore extends RestVersionInfo implements IRest
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceModifiedException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             try {
                 IResourceStore.IResourceId currentId = regularDictionaryStore.getCurrentResourceId(id);
                 throw RestUtilities.createConflictException(resourceURI, currentId);
             } catch (IResourceStore.ResourceNotFoundException e1) {
+                logger.debug(e.getLocalizedMessage(), e);
                 throw new NotFoundException(e.getLocalizedMessage(), e);
             }
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NotFoundException(e.getLocalizedMessage(), e);
         }
     }
@@ -113,13 +119,16 @@ public class RestRegularDictionaryStore extends RestVersionInfo implements IRest
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceModifiedException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             try {
                 IResourceStore.IResourceId currentId = regularDictionaryStore.getCurrentResourceId(id);
                 throw RestUtilities.createConflictException(resourceURI, currentId);
             } catch (IResourceStore.ResourceNotFoundException e1) {
+                logger.debug(e.getLocalizedMessage(), e);
                 throw new NotFoundException(e.getLocalizedMessage(), e);
             }
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NotFoundException(e.getLocalizedMessage(), e);
         }
     }
@@ -136,6 +145,7 @@ public class RestRegularDictionaryStore extends RestVersionInfo implements IRest
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NotFoundException(e.getLocalizedMessage(), e);
         }
     }

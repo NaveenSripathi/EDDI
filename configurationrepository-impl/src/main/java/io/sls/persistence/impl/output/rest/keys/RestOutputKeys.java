@@ -40,7 +40,7 @@ public class RestOutputKeys implements IRestOutputKeys {
         this.behaviorStore = behaviorStore;
         this.outputStore = outputStore;
     }
-    
+
     @Override
     public List<String> readOutputKeys(String packageId, Integer packageVersion, String filter, Integer limit) {
         List<String> retOutputKeys = new LinkedList<String>();
@@ -75,6 +75,7 @@ public class RestOutputKeys implements IRestOutputKeys {
 
             return sortedOutputKeys(retOutputKeys);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         } catch (IResourceStore.ResourceStoreException e) {
             logger.error(e.getLocalizedMessage(), e);

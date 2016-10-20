@@ -93,6 +93,7 @@ public class RestTestCaseStore implements IRestTestCaseStore {
             logger.error(e.getMessage(), e);
             throw new InternalServerErrorException(e.getMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(e);
         }
     }
@@ -121,6 +122,7 @@ public class RestTestCaseStore implements IRestTestCaseStore {
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NotFoundException(e.getLocalizedMessage(), e);
         }
     }
@@ -133,6 +135,7 @@ public class RestTestCaseStore implements IRestTestCaseStore {
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         }
     }
@@ -156,6 +159,7 @@ public class RestTestCaseStore implements IRestTestCaseStore {
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         }
     }
@@ -169,8 +173,10 @@ public class RestTestCaseStore implements IRestTestCaseStore {
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         } catch (IResourceStore.ResourceModifiedException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.CONFLICT);
         }
     }
@@ -183,8 +189,10 @@ public class RestTestCaseStore implements IRestTestCaseStore {
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e);
         } catch (IResourceStore.ResourceModifiedException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.CONFLICT);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         }
     }

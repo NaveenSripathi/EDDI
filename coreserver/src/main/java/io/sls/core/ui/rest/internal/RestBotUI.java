@@ -92,6 +92,7 @@ public class RestBotUI implements IRestBotUI {
                     location = htmlFace.getUiLocation();
                 }
             } catch (IResourceStore.ResourceNotFoundException e) {
+                logger.debug(e.getLocalizedMessage(), e);
                 if (RuntimeUtilities.isNullOrEmpty(botId)) {
                     throw e;
                 }
@@ -125,8 +126,10 @@ public class RestBotUI implements IRestBotUI {
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceStoreException | ServletException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NotFoundException(e.getLocalizedMessage(), e);
         }
     }
@@ -143,6 +146,7 @@ public class RestBotUI implements IRestBotUI {
             logger.error(e.getMessage(), e);
             throw new NotFoundException(e.getMessage(), e);
         } catch (IResourceStore.ResourceStoreException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         }
     }
@@ -157,6 +161,7 @@ public class RestBotUI implements IRestBotUI {
             logger.error(e.getMessage(), e);
             throw new NotFoundException(e.getMessage(), e);
         } catch (IResourceStore.ResourceStoreException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         }
     }
@@ -166,6 +171,7 @@ public class RestBotUI implements IRestBotUI {
         try {
             htmlFace = faceStore.searchFaceByHost(serverName);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             htmlFace = new HtmlFace();
             htmlFace.setUiIdentifier("default");
         }

@@ -78,6 +78,7 @@ public class RestDocumentDescriptorStore extends RestVersionInfo implements IRes
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NotFoundException(e.getLocalizedMessage(), e);
         }
     }

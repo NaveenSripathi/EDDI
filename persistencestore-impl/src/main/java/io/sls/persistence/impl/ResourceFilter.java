@@ -80,7 +80,7 @@ public class ResourceFilter<T> implements IResourceFilter<T> {
                 try {
                     permissions = getPermissions(id);
                 } catch (IResourceStore.ResourceNotFoundException e) {
-                    logger.warn("Missing Permission with Resource id: %s , access has been granted.");
+                    logger.warn("Missing Permission with Resource id: %s , access has been granted.", e);
                 }
 
                 if (permissions != null && permissions.getPermissions().values().isEmpty()) {

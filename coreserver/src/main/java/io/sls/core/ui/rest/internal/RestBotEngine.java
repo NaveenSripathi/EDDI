@@ -92,6 +92,7 @@ public class RestBotEngine implements IRestBotEngine {
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         }
     }
@@ -169,6 +170,7 @@ public class RestBotEngine implements IRestBotEngine {
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage(), e);
@@ -229,6 +231,7 @@ public class RestBotEngine implements IRestBotEngine {
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage(), e);
@@ -288,6 +291,7 @@ public class RestBotEngine implements IRestBotEngine {
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage(), e);

@@ -3,6 +3,7 @@ package io.sls.persistence.impl.resources;
 import io.sls.persistence.IResourceStorage;
 import io.sls.persistence.IResourceStore;
 import io.sls.persistence.impl.mongo.HistorizedResourceStore;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import java.util.Map;
  * Time: 15:07
  * To change this template use File | Settings | File Templates.
  */
+@Slf4j
 public class HistorizedResourceStoreTest {
     private HistorizedResourceStore<DataClass> testResourceStore;
     private TestResourceStorage mockResourceStorage;
@@ -196,6 +198,7 @@ public class HistorizedResourceStoreTest {
             testResourceStore.read("unknownId", 1);
             Assert.fail();
         } catch (IResourceStore.ResourceNotFoundException e) {
+            log.debug(e.getLocalizedMessage(), e);
             // OK
         }
 

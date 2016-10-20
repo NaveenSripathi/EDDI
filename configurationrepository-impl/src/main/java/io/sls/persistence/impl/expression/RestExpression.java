@@ -48,6 +48,7 @@ public class RestExpression implements IRestExpressions {
             }
             return retExpressions;
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         } catch (IResourceStore.ResourceStoreException e) {
             logger.error(e.getLocalizedMessage(), e);

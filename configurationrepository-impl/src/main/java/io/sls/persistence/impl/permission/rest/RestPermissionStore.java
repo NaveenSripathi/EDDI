@@ -4,6 +4,7 @@ import io.sls.permission.IPermissionStore;
 import io.sls.permission.model.Permissions;
 import io.sls.permission.rest.IRestPermissionStore;
 import io.sls.persistence.IResourceStore;
+import lombok.extern.slf4j.Slf4j;
 import org.jboss.resteasy.spi.NoLogWebApplicationException;
 
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.Response;
  * Date: 20.11.12
  * Time: 11:48
  */
+@Slf4j
 public class RestPermissionStore implements IRestPermissionStore {
     private final String resourceURI = "resource://io.sls.permission/permissionstore/permissions/";
     private final IPermissionStore permissionStore;
@@ -30,9 +32,11 @@ public class RestPermissionStore implements IRestPermissionStore {
         try {
             return permissionStore.readFilteredPermissions(resourceId);
         } catch (IResourceStore.ResourceStoreException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
 
         } catch (IResourceStore.ResourceNotFoundException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         }
     }

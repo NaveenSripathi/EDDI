@@ -56,6 +56,7 @@ public class MongoLoginService implements LoginService {
         } catch (IResourceStore.ResourceStoreException e) {
             logger.error("Could not process login.", e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             //no user entity found for the given username
         }
 

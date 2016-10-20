@@ -45,6 +45,7 @@ public class RestBehaviorStore extends RestVersionInfo implements IRestBehaviorS
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
     }
@@ -54,6 +55,7 @@ public class RestBehaviorStore extends RestVersionInfo implements IRestBehaviorS
         try {
             return behaviorStore.read(id, version);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         } catch (IResourceStore.ResourceStoreException e) {
             logger.error(e.getLocalizedMessage(), e);
@@ -77,6 +79,7 @@ public class RestBehaviorStore extends RestVersionInfo implements IRestBehaviorS
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         }
     }
@@ -101,6 +104,7 @@ public class RestBehaviorStore extends RestVersionInfo implements IRestBehaviorS
             logger.error(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         } catch (IResourceStore.ResourceModifiedException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             try {
                 IResourceStore.IResourceId currentId = behaviorStore.getCurrentResourceId(id);
                 throw RestUtilities.createConflictException(resourceURI, currentId);
@@ -108,6 +112,7 @@ public class RestBehaviorStore extends RestVersionInfo implements IRestBehaviorS
                 throw new NotFoundException(e.getLocalizedMessage(), e);
             }
         } catch (IResourceStore.ResourceNotFoundException e) {
+            logger.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(Response.Status.NOT_FOUND);
         }
     }

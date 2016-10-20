@@ -16,6 +16,7 @@ import io.sls.user.impl.utilities.UserUtilities;
 import io.sls.user.model.User;
 import io.sls.utilities.RestUtilities;
 import io.sls.utilities.RuntimeUtilities;
+import lombok.extern.slf4j.Slf4j;
 import org.jboss.resteasy.annotations.interception.SecurityPrecedence;
 import org.jboss.resteasy.annotations.interception.ServerInterceptor;
 
@@ -39,6 +40,7 @@ import java.security.Principal;
 @Provider
 @ServerInterceptor
 @SecurityPrecedence
+@Slf4j
 public class PermissionRequestInterceptor implements ContainerRequestFilter {
     private static final String POST = "POST";
     private static final String GET = "GET";
@@ -94,6 +96,7 @@ public class PermissionRequestInterceptor implements ContainerRequestFilter {
                 //no specific resource has been targeted --> allow access
             }
         } catch (IResourceStore.ResourceStoreException | IResourceStore.ResourceNotFoundException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         }
     }
@@ -102,6 +105,7 @@ public class PermissionRequestInterceptor implements ContainerRequestFilter {
         try {
             return UserUtilities.getUserURI(userStore, principal);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            log.debug(e.getLocalizedMessage(), e);
             User user = new User();
             user.setUsername(principal.getName());
             String id = userStore.createUser(user);

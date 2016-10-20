@@ -5,6 +5,7 @@ import io.sls.faces.html.model.HtmlFace;
 import io.sls.faces.html.rest.IRestHtmlFaceStore;
 import io.sls.persistence.IResourceStore;
 import io.sls.utilities.RestUtilities;
+import lombok.extern.slf4j.Slf4j;
 import org.jboss.resteasy.plugins.guice.RequestScoped;
 import org.jboss.resteasy.spi.HttpResponse;
 import org.jboss.resteasy.spi.NoLogWebApplicationException;
@@ -21,6 +22,7 @@ import java.net.URI;
  * Time: 16:52
  */
 @RequestScoped
+@Slf4j
 public class RestHtmlFaceStore implements IRestHtmlFaceStore {
     private final HttpResponse httpResponse;
     private final IHtmlFaceStore htmlFaceStore;
@@ -37,8 +39,10 @@ public class RestHtmlFaceStore implements IRestHtmlFaceStore {
         try {
             return htmlFaceStore.searchFaceByHost(host);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(e, Response.Status.NOT_FOUND);
         } catch (IResourceStore.ResourceStoreException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         }
     }
@@ -48,8 +52,10 @@ public class RestHtmlFaceStore implements IRestHtmlFaceStore {
         try {
             return htmlFaceStore.readFace(faceId);
         } catch (IResourceStore.ResourceNotFoundException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new NoLogWebApplicationException(e, Response.Status.NOT_FOUND);
         } catch (IResourceStore.ResourceStoreException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         }
     }
@@ -59,6 +65,7 @@ public class RestHtmlFaceStore implements IRestHtmlFaceStore {
         try {
             htmlFaceStore.updateFace(faceId, htmlFace);
         } catch (IResourceStore.ResourceStoreException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         }
     }
@@ -70,6 +77,7 @@ public class RestHtmlFaceStore implements IRestHtmlFaceStore {
             httpResponse.setStatus(Response.Status.CREATED.getStatusCode());
             return RestUtilities.createURI(resourceURI, id);
         } catch (IResourceStore.ResourceStoreException e) {
+            log.debug(e.getLocalizedMessage(), e);
             throw new InternalServerErrorException(e.getLocalizedMessage(), e);
         }
     }
