@@ -1,9 +1,12 @@
 package io.sls.server;
 
+import lombok.Getter;
+
 import javax.servlet.Servlet;
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 public class HttpServletHolder {
     private Servlet servlet;
     private final String path;
@@ -16,18 +19,6 @@ public class HttpServletHolder {
 
     public void setServlet(Servlet servlet) {
         this.servlet = servlet;
-    }
-
-    public Servlet getServlet() {
-        return servlet;
-    }
-
-    public Map<String, String> getInitParameter() {
-        return initParameter;
-    }
-
-    public String getPath() {
-        return path;
     }
 
     public void addInitParameter(String key, String value) {
