@@ -1,5 +1,8 @@
 package io.sls.permission.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,28 +11,14 @@ import java.util.List;
  * Date: 29.08.12
  * Time: 10:43
  */
+@Getter
+@Setter
 public class AuthorizedSubjects {
     private List<AuthorizedUser> users;
     private List<AuthorizedGroup> groups;
 
     public AuthorizedSubjects() {
-        this.users = new ArrayList<AuthorizedUser>();
-        this.groups = new ArrayList<AuthorizedGroup>();
-    }
-
-    public List<AuthorizedUser> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<AuthorizedUser> users) {
-        this.users = users;
-    }
-
-    public List<AuthorizedGroup> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(List<AuthorizedGroup> groups) {
-        this.groups = groups;
+        this.users = new ArrayList<>();
+        this.groups = new ArrayList<>();
     }
 }

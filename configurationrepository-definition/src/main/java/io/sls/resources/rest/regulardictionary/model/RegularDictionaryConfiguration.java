@@ -1,6 +1,8 @@
 package io.sls.resources.rest.regulardictionary.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
  * Date: 04.06.12
  * Time: 20:18
  */
+@Getter
 public class RegularDictionaryConfiguration {
     private String language;
     private List<WordConfiguration> words;
@@ -20,51 +23,18 @@ public class RegularDictionaryConfiguration {
         this.phrases = new ArrayList<>();
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
     public void setLanguage(String language) {
         this.language = language;
     }
 
-    public List<WordConfiguration> getWords() {
-        return words;
-    }
 
-    public List<PhraseConfiguration> getPhrases() {
-        return phrases;
-    }
-
+    @Getter
+    @Setter
     @JsonIgnoreProperties({"auto_generate_expression", "auto_to_lower"})
     public static class WordConfiguration {
         private String word;
         private String exp;
         private int frequency;
-
-        public String getWord() {
-            return word;
-        }
-
-        public void setWord(String word) {
-            this.word = word;
-        }
-
-        public String getExp() {
-            return exp;
-        }
-
-        public void setExp(String exp) {
-            this.exp = exp;
-        }
-
-        public int getFrequency() {
-            return frequency;
-        }
-
-        public void setFrequency(int frequency) {
-            this.frequency = frequency;
-        }
 
         @Override
         public boolean equals(Object o) {
@@ -83,25 +53,11 @@ public class RegularDictionaryConfiguration {
     }
 
     @JsonIgnoreProperties({"auto_generate_expression", "auto_to_lower"})
+    @Getter
+    @Setter
     public static class PhraseConfiguration {
         protected String phrase;
         protected String exp;
-
-        public String getPhrase() {
-            return phrase;
-        }
-
-        public void setPhrase(String phrase) {
-            this.phrase = phrase;
-        }
-
-        public String getExp() {
-            return exp;
-        }
-
-        public void setExp(String exp) {
-            this.exp = exp;
-        }
 
         @Override
         public boolean equals(Object o) {

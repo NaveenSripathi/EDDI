@@ -8,6 +8,8 @@ import io.sls.core.runtime.client.bots.IBotStoreClientLibrary;
 import io.sls.core.runtime.service.ServiceException;
 import io.sls.memory.IConversationMemory;
 import io.sls.memory.model.Deployment;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.inject.Inject;
 import java.util.*;
@@ -126,28 +128,14 @@ public class BotFactory implements IBotFactory {
         return environments.get(environment);
     }
 
+    @Setter
+    @Getter
     private class BotId {
         private String id;
         private Integer version;
 
         private BotId(String id, Integer version) {
             this.id = id;
-            this.version = version;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public Integer getVersion() {
-            return version;
-        }
-
-        public void setVersion(Integer version) {
             this.version = version;
         }
 

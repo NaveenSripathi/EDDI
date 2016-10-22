@@ -3,6 +3,9 @@ package io.sls.memory.impl;
 import io.sls.memory.IConversationMemory;
 import io.sls.memory.IData;
 import io.sls.memory.model.ConversationState;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.*;
 
@@ -18,7 +21,7 @@ public class ConversationMemory implements IConversationMemory {
 
     private IWritableConversationStep currentStep;
     private Stack<IConversationStep> previousSteps;
-    private Stack<IConversationStep> redoCache = new Stack<IConversationStep>();
+    private Stack<IConversationStep> redoCache = new Stack<>();
     private IConversationMemory.IConversationContext context;
     private ConversationState conversationState;
 
@@ -194,6 +197,9 @@ public class ConversationMemory implements IConversationMemory {
         }
     }
 
+    @Getter
+    @Setter
+    @AllArgsConstructor
     public static class ConversationContext implements IConversationContext {
         private String context;
 
@@ -201,21 +207,10 @@ public class ConversationMemory implements IConversationMemory {
             this.context = "";
         }
 
-        public ConversationContext(String context) {
-            this.context = context;
-        }
-
         public ConversationContext(IConversationContext context) {
             this.context = context.getContext();
         }
 
-        public String getContext() {
-            return context;
-        }
-
-        public void setContext(String context) {
-            this.context = context;
-        }
 
         @Override
         public boolean equals(Object o) {

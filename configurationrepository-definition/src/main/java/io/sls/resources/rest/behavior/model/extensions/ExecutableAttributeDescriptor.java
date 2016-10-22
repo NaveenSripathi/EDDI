@@ -1,5 +1,8 @@
 package io.sls.resources.rest.behavior.model.extensions;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
 /**
@@ -7,43 +10,13 @@ import java.util.List;
  * Date: 06.08.12
  * Time: 13:16
  */
+@Getter
+@Setter
 public class ExecutableAttributeDescriptor {
     private String name;
     private String type;
     private List<String> possibleValues;
     private String description;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public List<String> getPossibleValues() {
-        return possibleValues;
-    }
-
-    public void setPossibleValues(List<String> possibleValues) {
-        this.possibleValues = possibleValues;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     @Override
     public boolean equals(Object o) {

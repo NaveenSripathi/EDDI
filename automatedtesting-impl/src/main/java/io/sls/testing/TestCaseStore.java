@@ -64,10 +64,8 @@ public class TestCaseStore implements ITestCaseStore, IResourceStore<TestCase> {
 
             document.removeField("_id");
 
-            TestCase testCase = JSONSerialization.deserialize(document.toString(), new TypeReference<TestCase>() {
+            return JSONSerialization.deserialize(document.toString(), new TypeReference<TestCase>() {
             });
-
-            return testCase;
         } catch (IOException e) {
             throw new IResourceStore.ResourceStoreException(e.getLocalizedMessage(), e);
         }

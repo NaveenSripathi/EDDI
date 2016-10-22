@@ -58,7 +58,7 @@ public class RestTestCaseStore implements IRestTestCaseStore {
     @Override
     public List<TestCaseDescriptor> readTestCaseDescriptors(String botId, Integer botVersion, Integer index, Integer limit) {
         try {
-            List<TestCaseDescriptor> retConversationDescriptors = new LinkedList<TestCaseDescriptor>();
+            List<TestCaseDescriptor> retConversationDescriptors = new LinkedList<>();
             List<TestCaseDescriptor> testCaseDescriptors;
             do {
                 testCaseDescriptors = testCaseDescriptorStore.readDescriptors("io.sls.testcases", null, index, limit, false);

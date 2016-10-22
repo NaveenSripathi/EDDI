@@ -4,6 +4,8 @@ import io.sls.core.runtime.IExecutablePackage;
 import io.sls.core.runtime.IPackageFactory;
 import io.sls.core.runtime.client.packages.IPackageStoreClientLibrary;
 import io.sls.core.runtime.service.ServiceException;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -36,28 +38,14 @@ public class PackageFactory implements IPackageFactory {
         return executablePackages.get(id);
     }
 
+    @Getter
+    @Setter
     private class PackageId {
         private String id;
         private Integer version;
 
         private PackageId(String id, Integer version) {
             this.id = id;
-            this.version = version;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public Integer getVersion() {
-            return version;
-        }
-
-        public void setVersion(Integer version) {
             this.version = version;
         }
 

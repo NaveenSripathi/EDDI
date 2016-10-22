@@ -1,5 +1,10 @@
 package io.sls.permission.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.net.URI;
 import java.util.List;
 
@@ -8,33 +13,13 @@ import java.util.List;
  * Date: 07.09.12
  * Time: 15:21
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class AuthorizedUser {
     private URI user;
     private List<Integer> versions;
-
-    public AuthorizedUser() {
-    }
-
-    public AuthorizedUser(URI user, List<Integer> versions) {
-        this.user = user;
-        this.versions = versions;
-    }
-
-    public URI getUser() {
-        return user;
-    }
-
-    public void setUser(URI user) {
-        this.user = user;
-    }
-
-    public List<Integer> getVersions() {
-        return versions;
-    }
-
-    public void setVersions(List<Integer> versions) {
-        this.versions = versions;
-    }
 
     @Override
     public boolean equals(Object o) {

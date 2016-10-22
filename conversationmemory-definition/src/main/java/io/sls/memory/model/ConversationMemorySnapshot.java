@@ -1,6 +1,11 @@
 package io.sls.memory.model;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +16,8 @@ import java.util.Stack;
  * Date: 23.08.12
  * Time: 15:03
  */
+@Getter
+@Setter
 public class ConversationMemorySnapshot {
     private String id;
     private String botId;
@@ -25,54 +32,6 @@ public class ConversationMemorySnapshot {
     public ConversationMemorySnapshot() {
         this.conversationSteps = new LinkedList<>();
         this.redoCache = new Stack<>();
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getBotId() {
-        return botId;
-    }
-
-    public void setBotId(String botId) {
-        this.botId = botId;
-    }
-
-    public Integer getBotVersion() {
-        return botVersion;
-    }
-
-    public void setBotVersion(Integer botVersion) {
-        this.botVersion = botVersion;
-    }
-
-    public Deployment.Environment getEnvironment() {
-        return environment;
-    }
-
-    public void setEnvironment(Deployment.Environment environment) {
-        this.environment = environment;
-    }
-
-    public ConversationState getConversationState() {
-        return conversationState;
-    }
-
-    public void setConversationState(ConversationState conversationState) {
-        this.conversationState = conversationState;
-    }
-
-    public List<ConversationStepSnapshot> getConversationSteps() {
-        return conversationSteps;
-    }
-
-    public void setConversationSteps(List<ConversationStepSnapshot> conversationSteps) {
-        this.conversationSteps = conversationSteps;
     }
 
     @Override
@@ -91,27 +50,13 @@ public class ConversationMemorySnapshot {
         return conversationSteps != null ? conversationSteps.hashCode() : 0;
     }
 
-    public void setRedoCache(Stack<ConversationStepSnapshot> redoCache) {
-        this.redoCache = redoCache;
-    }
-
-    public Stack<ConversationStepSnapshot> getRedoCache() {
-        return redoCache;
-    }
-
+    @Getter
+    @Setter
     public static class ConversationStepSnapshot {
         private List<PackageRunSnapshot> packages;
 
         public ConversationStepSnapshot() {
-            this.packages = new LinkedList<PackageRunSnapshot>();
-        }
-
-        public List<PackageRunSnapshot> getPackages() {
-            return packages;
-        }
-
-        public void setPackages(List<PackageRunSnapshot> packages) {
-            this.packages = packages;
+            this.packages = new LinkedList<>();
         }
 
         @Override
@@ -131,29 +76,16 @@ public class ConversationMemorySnapshot {
         }
     }
 
+    @Getter
+    @Setter
     public static class PackageRunSnapshot {
         private String context;
         private List<ResultSnapshot> lifecycleTasks;
 
         public PackageRunSnapshot() {
-            this.lifecycleTasks = new LinkedList<ResultSnapshot>();
+            this.lifecycleTasks = new LinkedList<>();
         }
 
-        public List<ResultSnapshot> getLifecycleTasks() {
-            return lifecycleTasks;
-        }
-
-        public void setLifecycleTasks(List<ResultSnapshot> lifecycleTasks) {
-            this.lifecycleTasks = lifecycleTasks;
-        }
-
-        public String getContext() {
-            return context;
-        }
-
-        public void setContext(String context) {
-            this.context = context;
-        }
 
         @Override
         public boolean equals(Object o) {
@@ -175,63 +107,16 @@ public class ConversationMemorySnapshot {
         }
     }
 
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class ResultSnapshot {
         private String key;
-        private List possibleResults;
         private Object result;
+        private List possibleResults;
         private Date timestamp;
         private boolean isPublic;
-
-        public ResultSnapshot() {
-        }
-
-        public ResultSnapshot(String key, Object result, List possibleResults, Date timestamp, boolean isPublic) {
-            this.key = key;
-            this.result = result;
-            this.possibleResults = possibleResults;
-            this.timestamp = timestamp;
-            this.isPublic = isPublic;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public void setKey(String key) {
-            this.key = key;
-        }
-
-        public List getPossibleResults() {
-            return possibleResults;
-        }
-
-        public void setPossibleResults(List possibleResults) {
-            this.possibleResults = possibleResults;
-        }
-
-        public Object getResult() {
-            return result;
-        }
-
-        public void setResult(Object result) {
-            this.result = result;
-        }
-
-        public Date getTimestamp() {
-            return timestamp;
-        }
-
-        public void setTimestamp(Date timestamp) {
-            this.timestamp = timestamp;
-        }
-
-        public boolean isPublic() {
-            return isPublic;
-        }
-
-        public void setPublic(boolean aPublic) {
-            isPublic = aPublic;
-        }
 
         @Override
         public boolean equals(Object o) {

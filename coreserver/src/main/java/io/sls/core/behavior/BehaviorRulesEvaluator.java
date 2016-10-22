@@ -3,6 +3,7 @@ package io.sls.core.behavior;
 import io.sls.core.behavior.extensions.IExtension;
 import io.sls.memory.IConversationMemory;
 import io.sls.utilities.RuntimeUtilities;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,12 +14,10 @@ import java.util.LinkedList;
  * Date: 21.01.2010
  * Time: 15:57:33
  */
+@NoArgsConstructor
 public class BehaviorRulesEvaluator {
     private BehaviorSet behaviorSet;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    public BehaviorRulesEvaluator() {
-    }
 
     public void setBehaviorSet(BehaviorSet behaviorSet) {
         this.behaviorSet = behaviorSet;

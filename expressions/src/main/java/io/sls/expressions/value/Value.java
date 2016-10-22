@@ -2,6 +2,7 @@ package io.sls.expressions.value;
 
 import io.sls.expressions.Expression;
 import io.sls.utilities.CharacterUtilities;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,12 +11,10 @@ import org.slf4j.LoggerFactory;
  * Date: 16.12.2009
  * Time: 11:42:28
  */
+@NoArgsConstructor
 public class Value extends Expression {
     private static Logger log = LoggerFactory.getLogger(Value.class);
-
-    public Value() {
-    }
-
+    
     public Value(String expressionName) {
         super(expressionName);
     }

@@ -1,5 +1,8 @@
 package io.sls.core.behavior;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,39 +11,17 @@ import java.util.List;
  * Date: 09.06.12
  * Time: 16:21
  */
+@Getter
+@Setter
 public class BehaviorSetResult {
     private List<BehaviorRule> successRules;
     private List<BehaviorRule> droppedSuccessRules;
     private List<BehaviorRule> failRules;
 
     public BehaviorSetResult() {
-        successRules = new LinkedList<BehaviorRule>();
-        droppedSuccessRules = new LinkedList<BehaviorRule>();
-        failRules = new LinkedList<BehaviorRule>();
-    }
-
-    public List<BehaviorRule> getSuccessRules() {
-        return successRules;
-    }
-
-    public void setSuccessRules(List<BehaviorRule> successRules) {
-        this.successRules = successRules;
-    }
-
-    public List<BehaviorRule> getDroppedSuccessRules() {
-        return droppedSuccessRules;
-    }
-
-    public void setDroppedSuccessRules(List<BehaviorRule> droppedSuccessRules) {
-        this.droppedSuccessRules = droppedSuccessRules;
-    }
-
-    public List<BehaviorRule> getFailRules() {
-        return failRules;
-    }
-
-    public void setFailRules(List<BehaviorRule> failRules) {
-        this.failRules = failRules;
+        successRules = new LinkedList<>();
+        droppedSuccessRules = new LinkedList<>();
+        failRules = new LinkedList<>();
     }
 
     @Override

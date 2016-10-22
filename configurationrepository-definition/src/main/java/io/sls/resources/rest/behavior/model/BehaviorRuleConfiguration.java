@@ -1,6 +1,8 @@
 package io.sls.resources.rest.behavior.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -11,6 +13,8 @@ import java.util.List;
  * Date: 24.03.12
  * Time: 18:37
  */
+@Getter
+@Setter
 @JsonIgnoreProperties({"default", "id", "producesOutput", "selected", "sequenceNumber", "opened"})
 public class BehaviorRuleConfiguration {
     private String name;
@@ -18,33 +22,10 @@ public class BehaviorRuleConfiguration {
     private List<BehaviorRuleElementConfiguration> children;
 
     public BehaviorRuleConfiguration() {
-        actions = new LinkedList<String>();
-        children = new ArrayList<BehaviorRuleElementConfiguration>();
+        actions = new LinkedList<>();
+        children = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<String> getActions() {
-        return actions;
-    }
-
-    public void setActions(List<String> actions) {
-        this.actions = actions;
-    }
-
-    public List<BehaviorRuleElementConfiguration> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<BehaviorRuleElementConfiguration> children) {
-        this.children = children;
-    }
 
     @Override
     public boolean equals(Object o) {

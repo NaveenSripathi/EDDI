@@ -3,6 +3,7 @@ package io.sls.resources.rest.behavior.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -14,6 +15,7 @@ import java.util.Map;
  * Date: 01.04.12
  * Time: 15:45
  */
+@Getter
 @JsonIgnoreProperties({"id", "behaviorRules", "editable", "opened", "name", "selected"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BehaviorRuleElementConfiguration {
@@ -28,17 +30,5 @@ public class BehaviorRuleElementConfiguration {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public Map<String, String> getValues() {
-        return values;
-    }
-
-    public List<BehaviorRuleElementConfiguration> getChildren() {
-        return children;
     }
 }

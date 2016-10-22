@@ -1,5 +1,8 @@
 package io.sls.core.utilities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,30 +61,12 @@ public class URIUtilities {
         return new ResourceId(id, version);
     }
 
+    @AllArgsConstructor
+    @Getter
+    @Setter
     public static class ResourceId {
         private String id;
         private Integer version;
-
-        public ResourceId(String id, Integer version) {
-            this.id = id;
-            this.version = version;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public Integer getVersion() {
-            return version;
-        }
-
-        public void setVersion(Integer version) {
-            this.version = version;
-        }
     }
 
     public static List<URL> listToURL(List<String> urlStrings) {

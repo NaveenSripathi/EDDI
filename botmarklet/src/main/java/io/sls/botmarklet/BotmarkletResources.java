@@ -39,20 +39,20 @@ public class BotmarkletResources {
     }
 
     public void createResources(String baseURL) throws MalformedURLException {
-        cssResources = new LinkedList<URL>();
-        jsResources = new LinkedList<URL>();
+        cssResources = new LinkedList<>();
+        jsResources = new LinkedList<>();
 
         String snippetPath = FileUtilities.buildPath(rootWebDir, "snippet", "desktop");
 
         String cssDirPath = FileUtilities.buildPath(snippetPath, "css", "excluded");
-        List<String> cssPaths = new LinkedList<String>();
+        List<String> cssPaths = new LinkedList<>();
         FileUtilities.extractRelativePaths(cssPaths, cssDirPath, cssDirPath);
         for (String cssPath : cssPaths) {
             cssResources.add(new URL(PathUtilities.buildPath('/', false, baseURL, "text", "snippet", "desktop", "css", "excluded", cssPath)));
         }
 
         String jsDirPath = FileUtilities.buildPath(snippetPath, "js", "excluded");
-        List<String> jsPaths = new LinkedList<String>();
+        List<String> jsPaths = new LinkedList<>();
         FileUtilities.extractRelativePaths(jsPaths, jsDirPath, jsDirPath);
         for (String jsPath : jsPaths) {
             jsResources.add(new URL(PathUtilities.buildPath('/', false, baseURL, "text", "snippet", "desktop", "js", "excluded", jsPath)));

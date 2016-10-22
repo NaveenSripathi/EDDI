@@ -3,6 +3,8 @@ package io.sls.persistence.impl.resources;
 import io.sls.persistence.IResourceStorage;
 import io.sls.persistence.IResourceStore;
 import io.sls.persistence.impl.mongo.HistorizedResourceStore;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,23 +26,16 @@ public class HistorizedResourceStoreTest {
     private HistorizedResourceStore<DataClass> testResourceStore;
     private TestResourceStorage mockResourceStorage;
 
+    @Getter
+    @Setter
     private class DataClass {
         private String data;
-
-        public String getData() {
-            return data;
-        }
-
-        public void setData(String data) {
-            this.data = data;
-        }
-
     }
 
     private class TestResourceStorage implements IResourceStorage<DataClass> {
         private int highestId = 1;
 
-        private Map<String, IResource> resources = new HashMap<String, IResource>();
+        private Map<String, IResource> resources = new HashMap<>();
 
         public Map<String, Map<Integer, IHistoryResource>> getHistory() {
             return history;
@@ -50,7 +45,7 @@ public class HistorizedResourceStoreTest {
             return history.get(id);
         }
 
-        private Map<String, Map<Integer, IHistoryResource>> history = new HashMap<String, Map<Integer, IHistoryResource>>();
+        private Map<String, Map<Integer, IHistoryResource>> history = new HashMap<>();
 
         @Override
         public IResource newResource(DataClass content) throws IOException {
@@ -86,7 +81,7 @@ public class HistorizedResourceStoreTest {
                 return null;
             }
 
-            if (version != resource.getVersion()) {
+            if (!version.equals(resource.getVersion())) {
                 return null;
             }
 
@@ -152,7 +147,7 @@ public class HistorizedResourceStoreTest {
     @Before
     public void setUp() {
         mockResourceStorage = new TestResourceStorage();
-        testResourceStore = new HistorizedResourceStore<DataClass>(mockResourceStorage);
+        testResourceStore = new HistorizedResourceStore<>(mockResourceStorage);
     }
 
     @Test

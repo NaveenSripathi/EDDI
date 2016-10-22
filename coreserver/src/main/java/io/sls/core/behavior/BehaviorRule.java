@@ -2,6 +2,8 @@ package io.sls.core.behavior;
 
 import io.sls.core.behavior.extensions.IExtension;
 import io.sls.memory.IConversationMemory;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +15,8 @@ import java.util.List;
  * Date: 03.08.2009
  * Time: 14:39:16
  */
+@Getter
+@Setter
 public class BehaviorRule implements Cloneable {
     private String name;
     private List<String> actions;
@@ -21,38 +25,14 @@ public class BehaviorRule implements Cloneable {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public BehaviorRule() {
-        actions = new LinkedList<String>();
-        extensions = new LinkedList<IExtension>();
+        actions = new LinkedList<>();
+        extensions = new LinkedList<>();
     }
 
     public BehaviorRule(String name) {
         this.name = name;
-        actions = new LinkedList<String>();
-        extensions = new LinkedList<IExtension>();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<String> getActions() {
-        return actions;
-    }
-
-    public void setActions(List<String> actions) {
-        this.actions = actions;
-    }
-
-    public void setExtensions(List<IExtension> extensions) {
-        this.extensions = extensions;
-    }
-
-    public List<IExtension> getExtensions() {
-        return extensions;
+        actions = new LinkedList<>();
+        extensions = new LinkedList<>();
     }
 
     public IExtension.ExecutionState execute(IConversationMemory memory, List<BehaviorRule> trace) {
@@ -80,7 +60,7 @@ public class BehaviorRule implements Cloneable {
                 }
             }
 
-            List<BehaviorRule> tmp = new LinkedList<BehaviorRule>(trace);
+            List<BehaviorRule> tmp = new LinkedList<>(trace);
             trace.clear();
             trace.addAll(tmp.subList(0, tmp.indexOf(this)));
 
@@ -110,7 +90,7 @@ public class BehaviorRule implements Cloneable {
     public BehaviorRule clone() throws CloneNotSupportedException {
         BehaviorRule clone = new BehaviorRule(name);
 
-        List<IExtension> executablesClone = new LinkedList<IExtension>();
+        List<IExtension> executablesClone = new LinkedList<>();
         for (IExtension extension : extensions) {
             IExtension exClone = extension.clone();
             executablesClone.add(exClone);

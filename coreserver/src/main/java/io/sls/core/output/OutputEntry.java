@@ -1,48 +1,23 @@
 package io.sls.core.output;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * User: jarisch
  * Date: 12.03.12
  * Time: 16:35
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class OutputEntry implements Comparable<OutputEntry> {
     private String key;
     private String text;
     private int occurrence;
-
-    public OutputEntry() {
-        // empty contructor needed for serialization
-    }
-
-    public OutputEntry(String key, String text, int occurrence) {
-        this.key = key;
-        this.text = text;
-        this.occurrence = occurrence;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public int getOccurrence() {
-        return occurrence;
-    }
-
-    public void setOccurrence(int occurrence) {
-        this.occurrence = occurrence;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,9 @@
 package io.sls.core.behavior;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,11 +12,11 @@ import java.util.List;
  * Date: 04.08.2009
  * Time: 14:12:33
  */
+@Getter
+@Setter
+@NoArgsConstructor
 public class BehaviorSet {
     private List<BehaviorGroup> behaviorGroups = new LinkedList<BehaviorGroup>();
-
-    public BehaviorSet() {
-    }
 
     public List<BehaviorRule> getBehaviorRule(String behaviorRule) {
         List<BehaviorRule> ret = new LinkedList<BehaviorRule>();
@@ -25,13 +29,5 @@ public class BehaviorSet {
         }
 
         return ret;
-    }
-
-    public List<BehaviorGroup> getBehaviorGroups() {
-        return behaviorGroups;
-    }
-
-    public void setBehaviorGroups(List<BehaviorGroup> behaviorGroups) {
-        this.behaviorGroups = behaviorGroups;
     }
 }

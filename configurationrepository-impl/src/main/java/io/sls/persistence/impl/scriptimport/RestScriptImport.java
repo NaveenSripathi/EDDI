@@ -29,6 +29,9 @@ import io.sls.user.impl.utilities.UserUtilities;
 import io.sls.utilities.CharacterUtilities;
 import io.sls.utilities.RuntimeUtilities;
 import io.sls.utilities.SecurityUtilities;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.inject.Inject;
 import javax.ws.rs.InternalServerErrorException;
@@ -64,28 +67,16 @@ public class RestScriptImport implements IRestScriptImport {
         currentDateFormatted = new SimpleDateFormat("yy-MM-dd").format(new Date(System.currentTimeMillis()));
     }
 
+    @AllArgsConstructor
+    @Getter
+    @Setter
     public static class ScriptGroup {
         private String name;
         private List<ScriptEntity> scriptEntities;
-
-        public ScriptGroup(String groupName, List<ScriptEntity> scriptEntities) {
-            this.name = groupName;
-            this.scriptEntities = scriptEntities;
-        }
-
-        public List<ScriptEntity> getScriptEntities() {
-            return scriptEntities;
-        }
-
-        public void setScriptEntities(List<ScriptEntity> scriptEntities) {
-            this.scriptEntities = scriptEntities;
-        }
-
-        public String getName() {
-            return name;
-        }
     }
 
+    @Getter
+    @Setter
     public static class ScriptEntity {
         private List<String> questions;
         private List<String> keywords;
@@ -96,38 +87,6 @@ public class RestScriptImport implements IRestScriptImport {
             this.questions = new LinkedList<>(Arrays.asList(questions));
             this.answers = new LinkedList<>(Arrays.asList(answers));
             this.keywords = new LinkedList<>(Arrays.asList(keywords));
-            this.semantic = semantic;
-        }
-
-        public List<String> getQuestions() {
-            return questions;
-        }
-
-        public void setQuestions(List<String> questions) {
-            this.questions = questions;
-        }
-
-        public List<String> getKeywords() {
-            return keywords;
-        }
-
-        public void setKeywords(List<String> keywords) {
-            this.keywords = keywords;
-        }
-
-        public List<String> getAnswers() {
-            return answers;
-        }
-
-        public void setAnswers(List<String> answers) {
-            this.answers = answers;
-        }
-
-        public String getSemantic() {
-            return semantic;
-        }
-
-        public void setSemantic(String semantic) {
             this.semantic = semantic;
         }
     }
@@ -273,7 +232,7 @@ public class RestScriptImport implements IRestScriptImport {
     }
 
     private Map<String, Object> createParserExtension(String language, List<ScriptGroup> scriptGroups) throws RestInterfaceFactory.RestInterfaceFactoryException, IResourceStore.ResourceStoreException, IResourceStore.ResourceModifiedException, IResourceStore.ResourceNotFoundException {
-        List<Map<String, Object>> dictionaryExtensions = new LinkedList<Map<String, Object>>();
+        List<Map<String, Object>> dictionaryExtensions = new LinkedList<>();
         //parser.dictionary.punctuation
         Map<String, Object> punctuationExtension = createPunctuationExtension();
         dictionaryExtensions.add(punctuationExtension);
@@ -283,11 +242,11 @@ public class RestScriptImport implements IRestScriptImport {
         Map<String, Object> regularDictionaryExtension = createRegularDictionaryExtension(regularDictionaryUri);
         dictionaryExtensions.add(regularDictionaryExtension);
         //parser.dictionary
-        Map<String, Object> parserExtension = new HashMap<String, Object>();
+        Map<String, Object> parserExtension = new HashMap<>();
         parserExtension.put("dictionaries", dictionaryExtensions.toArray());
 
         //parser.corrections
-        List<Map<String, Object>> corrections = new LinkedList<Map<String, Object>>();
+        List<Map<String, Object>> corrections = new LinkedList<>();
         //parser.corrections.levenshtein
         Map<String, Object> levenstheinConfiguration = createLevenshteinDistanceCorrection();
         corrections.add(levenstheinConfiguration);
@@ -314,8 +273,8 @@ public class RestScriptImport implements IRestScriptImport {
                 keywords = scriptEntity.getKeywords();
 
                 //distinct between words and phrases, since they are stored separately
-                List<String> keywordWords = new LinkedList<String>();
-                List<String> keywordPhrases = new LinkedList<String>();
+                List<String> keywordWords = new LinkedList<>();
+                List<String> keywordPhrases = new LinkedList<>();
                 for (String keyword : keywords) {
                     keyword = keyword.trim();
                     if (keyword.contains(" ")) {
@@ -337,16 +296,16 @@ public class RestScriptImport implements IRestScriptImport {
     }
 
     private Map<String, Object> createMergedTermsCorrection() {
-        Map<String, Object> mergedTermsCorrectionExtension = new HashMap<String, Object>();
+        Map<String, Object> mergedTermsCorrectionExtension = new HashMap<>();
         mergedTermsCorrectionExtension.put("type", "core://io.sls.parser.corrections.mergedTerms");
         mergedTermsCorrectionExtension.put("config", new HashMap<String, Object>());
         return mergedTermsCorrectionExtension;
     }
 
     private Map<String, Object> createLevenshteinDistanceCorrection() {
-        Map<String, Object> levenshteinCorrectionExtension = new HashMap<String, Object>();
+        Map<String, Object> levenshteinCorrectionExtension = new HashMap<>();
         levenshteinCorrectionExtension.put("type", "core://io.sls.parser.corrections.levenshtein");
-        Map<String, Object> config = new HashMap<String, Object>();
+        Map<String, Object> config = new HashMap<>();
         config.put("distance", "2");
         levenshteinCorrectionExtension.put("config", config);
         return levenshteinCorrectionExtension;
@@ -382,22 +341,22 @@ public class RestScriptImport implements IRestScriptImport {
     }*/
 
     private Map<String, Object> createRegularDictionaryExtension(URI regularDictionaryUri) {
-        Map<String, Object> regularDictionaryExtension = new HashMap<String, Object>();
+        Map<String, Object> regularDictionaryExtension = new HashMap<>();
         regularDictionaryExtension.put("type", "core://io.sls.parser.dictionaries.regular");
-        Map<String, Object> config = new HashMap<String, Object>();
+        Map<String, Object> config = new HashMap<>();
         config.put("uri", regularDictionaryUri);
         regularDictionaryExtension.put("config", config);
         return regularDictionaryExtension;
     }
 
     private Map<String, Object> createPunctuationExtension() {
-        Map<String, Object> punctuationExtension = new HashMap<String, Object>();
+        Map<String, Object> punctuationExtension = new HashMap<>();
         punctuationExtension.put("type", "core://io.sls.parser.dictionaries.punctuation");
         return punctuationExtension;
     }
 
     private List<RegularDictionaryConfiguration.WordConfiguration> createWords(List<String> keywords, String semantic) {
-        List<RegularDictionaryConfiguration.WordConfiguration> wordConfigurations = new LinkedList<RegularDictionaryConfiguration.WordConfiguration>();
+        List<RegularDictionaryConfiguration.WordConfiguration> wordConfigurations = new LinkedList<>();
         for (String keyword : keywords) {
             RegularDictionaryConfiguration.WordConfiguration wordConfiguration = new RegularDictionaryConfiguration.WordConfiguration();
             keyword = CharacterUtilities.createSemantic(keyword, true);
@@ -410,7 +369,7 @@ public class RestScriptImport implements IRestScriptImport {
     }
 
     private List<RegularDictionaryConfiguration.PhraseConfiguration> createPhrases(List<String> questions, String semantic) {
-        List<RegularDictionaryConfiguration.PhraseConfiguration> phraseConfigurations = new LinkedList<RegularDictionaryConfiguration.PhraseConfiguration>();
+        List<RegularDictionaryConfiguration.PhraseConfiguration> phraseConfigurations = new LinkedList<>();
         for (String question : questions) {
             RegularDictionaryConfiguration.PhraseConfiguration phraseConfiguration = new RegularDictionaryConfiguration.PhraseConfiguration();
             question = CharacterUtilities.createSemantic(question, false);
@@ -423,21 +382,21 @@ public class RestScriptImport implements IRestScriptImport {
     }
 
     private Map<String, Object> createBehaviourConfig(List<ScriptGroup> scriptGroups) throws RestInterfaceFactory.RestInterfaceFactoryException, IResourceStore.ResourceStoreException, IResourceStore.ResourceModifiedException, IResourceStore.ResourceNotFoundException {
-        Map<String, Object> config = new HashMap<String, Object>();
+        Map<String, Object> config = new HashMap<>();
 
         BehaviorConfiguration behaviorConfiguration = new BehaviorConfiguration();
-        List<BehaviorGroupConfiguration> behaviorGroups = new LinkedList<BehaviorGroupConfiguration>();
+        List<BehaviorGroupConfiguration> behaviorGroups = new LinkedList<>();
         for (ScriptGroup scriptGroup : scriptGroups) {
             BehaviorGroupConfiguration behaviorGroupConfiguration = new BehaviorGroupConfiguration();
             behaviorGroupConfiguration.setName(scriptGroup.getName());
-            List<BehaviorRuleConfiguration> behaviorRules = new LinkedList<BehaviorRuleConfiguration>();
+            List<BehaviorRuleConfiguration> behaviorRules = new LinkedList<>();
             for (ScriptEntity scriptEntity : scriptGroup.getScriptEntities()) {
                 BehaviorRuleConfiguration behaviorRuleConfiguration = new BehaviorRuleConfiguration();
                 String semantic = scriptEntity.getSemantic();
                 semantic = CharacterUtilities.createSemantic(semantic, true);
                 behaviorRuleConfiguration.setName(semantic);
-                behaviorRuleConfiguration.setActions(Arrays.asList(semantic));
-                LinkedList<BehaviorRuleElementConfiguration> children = new LinkedList<BehaviorRuleElementConfiguration>();
+                behaviorRuleConfiguration.setActions(Collections.singletonList(semantic));
+                LinkedList<BehaviorRuleElementConfiguration> children = new LinkedList<>();
                 BehaviorRuleElementConfiguration behaviorRuleElementConfiguration = new BehaviorRuleElementConfiguration();
                 behaviorRuleElementConfiguration.setType("inputmatcher");
                 Expression expression = expressionUtilities.createExpression(semantic, new AnyValue());
