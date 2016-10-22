@@ -76,7 +76,7 @@ public class PersistenceModule extends AbstractBaseModule {
             public void run() {
                 try {
                     mongoClient.close();
-                } catch (Throwable e) {
+                } catch (RuntimeException e) {
                     String message = "MongoClient did not stop as expected.";
                     System.out.println(message);
                 }

@@ -126,7 +126,7 @@ public class BaseRuntime implements SystemRuntime.IRuntime {
                 final T result = callable.call();
                 callback.onComplete(result);
                 return result;
-            } catch (Throwable t) {
+            } catch (RuntimeException t) {
                 logger.error(t.getLocalizedMessage(), t);
                 callback.onFailure(t);
                 throw new Exception("Error while executing callable.", t);
