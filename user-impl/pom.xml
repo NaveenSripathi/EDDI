@@ -58,7 +58,6 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-guice</artifactId>
-            <version>3.0.18.Final</version>
         </dependency>
     </dependencies>
 

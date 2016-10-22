@@ -18,7 +18,6 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>3.0.18.Final</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-simple</artifactId>
