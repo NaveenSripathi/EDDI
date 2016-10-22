@@ -102,6 +102,11 @@ public class BehaviorRule implements Cloneable {
     }
 
     @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    @Override
     public BehaviorRule clone() throws CloneNotSupportedException {
         BehaviorRule clone = new BehaviorRule(name);
 

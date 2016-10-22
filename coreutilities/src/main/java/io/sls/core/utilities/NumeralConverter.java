@@ -125,4 +125,9 @@ class CompareNumeralStrings implements Comparable<CompareNumeralStrings> {
     public int compareTo(CompareNumeralStrings o) {
         return new Integer(number).compareTo(o.number);
     }
+
+    @Override
+    public int hashCode() {
+        return number.hashCode();
+    }
 }

@@ -203,6 +203,15 @@ public class Expression implements Cloneable {
     }
 
     @Override
+    public int hashCode() {
+        int result = (expressionName != null ? expressionName.hashCode() : 0);
+        for (Expression e : getSubExpressions()) {
+            result = 31 * result + (e != null ? e.hashCode() : 0);
+        }
+        return result;
+    }
+
+    @Override
     public String toString() {
         StringBuilder ret = new StringBuilder();
 

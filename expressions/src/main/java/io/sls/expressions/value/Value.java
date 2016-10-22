@@ -53,4 +53,9 @@ public class Value extends Expression {
 
         return super.equals(o);
     }
+
+    @Override
+    public int hashCode() {
+        return this.toDouble().hashCode();
+    }
 }
