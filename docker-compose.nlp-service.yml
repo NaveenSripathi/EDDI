@@ -1,0 +1,6 @@
+version: '2'
+services:
+  eddi_mongodb:
+   nlp_service:
+       environment:
+         - ACTIVE: nlp_active

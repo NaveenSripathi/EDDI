@@ -1,0 +1,13 @@
+version: '2'
+services:
+  eddi_keycloak:
+    image: jboss/keycloak-mongo
+    links:
+      - eddi_mongodb
+#    depends_on:
+#      - eddi_mongodb
+    ports:
+      - 8080:8080
+    environment:
+       - MONGODB_DBNAME=keycloak
+       - MONGO_PORT_27017_TCP_ADDR=eddi_mongodb

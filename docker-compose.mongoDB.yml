@@ -1,0 +1,17 @@
+version: '2'
+services:
+  eddi_mongodb:
+    image: mongo
+#    build: ./dockers/mongodb
+    environment:
+      - MONGODB_DBNAME=keycloak
+    ports:
+        - "27017:27017"
+    volumes_from:
+        - mongodata_eddi
+    restart: always
+  mongodata_eddi:
+    image: ubuntu
+    volumes:
+      - "/persistence/mongodb_eddi:/data/db"
+    command: echo Persistence for Mongo
