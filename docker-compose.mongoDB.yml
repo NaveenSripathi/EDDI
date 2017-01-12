@@ -2,16 +2,19 @@ version: '2'
 services:
   eddi_mongodb:
     image: mongo
-#    build: ./dockers/mongodb
     environment:
+    #env var should be placed in docker-compose.override and not commmitted to svn for security reasons
+    #each env should come with its own defined docker-compose.override file
       - MONGODB_DBNAME=keycloak
     ports:
-        - "27017:27017"
+      - "27017:27017"
     volumes_from:
-        - mongodata_eddi
+      - eddi_mongodata
     restart: always
-  mongodata_eddi:
+  eddi_mongodata:
     image: ubuntu
     volumes:
+        #any critical data should be placed in docker-compose.override and not commmitted to svn for security reasons
+        #each env should come with its own defined docker-compose.override file
       - "/persistence/mongodb_eddi:/data/db"
     command: echo Persistence for Mongo

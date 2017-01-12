@@ -1,0 +1,23 @@
+#this file is searched and used by default by docker-compose up (when -f filename is not used Ex. docker-compose -f docker-compose.monogoDB up)
+version: '2'
+services:
+  eddi_nlp:
+    environment:
+      - ACTIVE: nlp_active
+  eddi_keycloak:
+    environment:
+        #env var should be placed in docker-compose.override and not commmitted to svn for security reasons
+        #each env should come with its own defined docker-compose.override file
+           - MONGODB_DBNAME=keycloak
+           - MONGO_PORT_27017_TCP_ADDR=eddi_mongodb
+  eddi_mongodb:
+    environment:
+        #env var should be placed in docker-compose.override and not commmitted to svn for security reasons
+        #each env should come with its own defined docker-compose.override file
+          - MONGODB_DBNAME=keycloak
+  eddi_mongodata:
+    volumes:
+            #any critical data should be placed in docker-compose.override and not commmitted to svn for security reasons
+            #each env should come with its own defined docker-compose.override file
+          - "/persistence/mongodb_eddi:/data/db"
+

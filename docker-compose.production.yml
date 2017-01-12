@@ -1,8 +1,9 @@
+#based on the CI output (project specific generated images)
 version: '2'
 services:
   eddi_nlp_service:
     image: eddi_nlp_service_prod
   eddi_mongodb:
-    image: mongo
+    image: eddi_mongo
   eddi_keycloack:
-    image:
+    image: eddi_keycloack

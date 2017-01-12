@@ -1,0 +1,25 @@
+version: '2'
+services:
+  eddi_nlp:
+    extends:
+      file: ./docker/nlp-service.parent.yml #using a common project and proving the use of extension in DC
+      service: eddi_nlp
+    environment:
+      - ACTIVE: nlp_active
+    depends_on:
+      - eddi_mongodb
+      - eddi_keycloak
+  eddi_keycloak:
+    extends:
+      file: ./docker-compose.keycloak.yml
+      service: eddi_keycloak
+  eddi_mongodb:
+    extends:
+      file: ./docker-compose.mongodb.yml
+      service: eddi_mongodb
+    depends_on:
+      - eddi_mongodata
+  eddi_mongodata:
+    extends:
+      file: ./docker-compose.mongodb.yml
+      service: eddi_mongodata

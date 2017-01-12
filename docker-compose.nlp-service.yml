@@ -4,3 +4,8 @@ services:
    nlp_service:
        environment:
          - ACTIVE: nlp_active
+#used to join the same network as nlp and mongoDB containers (their hosts are connected and available to each other )
+networks:
+  default:
+    external:
+      name: eddi_default

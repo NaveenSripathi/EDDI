@@ -1,0 +1,5 @@
+version: '2'
+services:
+   eddi_nlp:
+     environment:
+       - ACTIVE: nlp_active
